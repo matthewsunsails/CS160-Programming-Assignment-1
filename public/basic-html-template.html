@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- How you might structure an html file, for reference. -shm -->
+<html>
+  <head>
+    <!-- put your links to external stylesheets or external javascript files (whether
+    they are hosted somewhere on the internet, or in your local files) and
+    anything else you want to load first, before your webpage, here. -->
+  </head>
+
+  <body>
+    anything you want to visually show up on this webpage should be put in here,
+    like
+    <p>paragraphs,</p>
+    <input type="button" id="mycoolbutton" value="a cool button!" />
+    <div>and all other page content.</div>
+  </body>
+
+  <script>
+    //javascript can go in here. this is where I prefer to put it if it's going to be short and simple.
+
+    document.getElementById("mycoolbutton").onclick = () => {
+      console.log("button clicked!");
+    };
+  </script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- let's import our stylesheet (found in public/css/styles.css)-->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+  </head>
+
+  <!-- you can also specify styles straight in html! Let's use Courier New and brown text on this page.-->
+  <body style="font-family: 'Courier New'; color: #513605">
+    <header
+      style="background-color: #a99063; padding: 15px; text-align: center"
+    >
+      <h1>Page 4, What a Score!</h1>
+    </header>
+
+    <div class="site-view">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/a">Normal Rabbit</a>
+        <a href="/c">Sepia Rabbit</a>
+      </nav>
+
+      <!--let's override the background-color style from my stylesheet to make this section sepiatone, too.-->
+      <main style="background-color: #a99063">
+        <h2>This rabbit is sepiatone and likes to eat turnips.</h2>
+        <img
+          src="/images/sepiabunny.jpg"
+          alt="a sepiatone rabbit"
+          class="responsive centered"
+        />
+        <p>
+          Photo credits:
+          <a href="https://unsplash.com/photos/u_kMWN-BWyU"
+            >Satyabratasm on Unsplash
+          </a>
+        </p>
+      </main>
+
+      <footer>
+        <h2>About</h2>
+        <p>
+          This is some example code prepared for CS160: User Interface Design
+          &amp; Development, Spring 2024. It was built by Nate Weinman, Shm
+          Almeda, and Timothy J. Aveni.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
