@@ -6,50 +6,153 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
   </head>
 
-  <!-- you can also specify styles straight in HTML! these will almost override CSS stylesheets. -->
-  <!-- let's make this page use comic sans and dark blue for the body text. -->
-  <body
-    style="font-family: 'Comic Sans MS', 'Comic Sans', cursive; color: #0000aa"
-  >
-    <header
-      style="
-        background-color: #0000aa;
-        padding: 15px;
-        text-align: center;
-        color: #ffffff;
-      "
-    >
-      <h1>Page 2, Electric Boogaloo!</h1>
+  <style>
+    .content {
+      margin: auto;
+    }
+    #container {
+      display: inline-block;
+      text-align: center;
+    }
+  </style>
+
+  <body>
+    <header>
+      <h1>WattWheel: A Distance-Time Converter For Your Electric Transport Needs!</h1>
     </header>
 
     <div class="site-view">
       <nav>
         <a href="/">Home</a>
-        <a href="/b">Gray Rabbit</a>
-        <a href="/c">Sepia Rabbit</a>
+        <a href="/b">Time-to-Distance Converter</a>
       </nav>
 
-      <main>
-        <h2>Check out this cool rabbit!</h2>
-        <img
-          src="/images/bunny.jpg"
-          alt="a rabbit"
-          class="responsive centered"
-        />
-        <p>
-          Photo credits:
-          <a href="https://unsplash.com/photos/u_kMWN-BWyU">
-            Satyabratasm on Unsplash
-          </a>
+      <main class="content">
+        <h2>Distance-to-Time Converter</h2>
+        <p style="max-width: 500px">
+          To use this Distance-to-Time Converter, simply enter the distance you need to travel
+          and click the "Convert" button!
         </p>
+        <br>
+
+        <div id="container">
+          <form>
+            <p>Distance (miles):</p>
+            <p>
+              <input placeholder="Distance" type="number" id="distance"><br>
+              <button type="button" id="convert">Convert</button>
+            </p>
+            <br>
+            <p>Time (MM:SS):</p>
+            <div id="methods">
+              <p>
+                <label for="Walking">Walking</label>
+                <input type="string" id="Walking" readonly><br>
+              </p>
+              <p>
+                <label for="Boosted Mini S Board">Boosted Mini S Board</label>
+                <input type="string" id="Boosted Mini S Board" readonly><br>
+              </p>
+              <p>
+                <label for="Evolve Bamboo GTR 2in1">Evolve Bamboo GTR 2in1</label>
+                <input type="string" id="Evolve Bamboo GTR 2in1" readonly><br>
+              </p>
+              <p>
+                <label for="OneWheel XR">OneWheel XR</label>
+                <input type="string" id="OneWheel XR" readonly><br>
+              </p>
+              <p>
+                <label for="Swagtron Swagger 5 Elite">Swagtron Swagger 5 Elite</label>
+                <input type="string" id="Swagtron Swagger 5 Elite" readonly><br>
+              </p>
+              <p>
+                <label for="Segway Ninebot S">Segway Ninebot S</label>
+                <input type="string" id="Segway Ninebot S" readonly><br>
+              </p>
+              <p>
+                <label for="Segway Ninebot S-PLUS">Segway Ninebot S-PLUS</label>
+                <input type="string" id="Segway Ninebot S-PLUS" readonly><br>
+              </p>
+              <p>
+                <label for="Razor Scooter">Razor Scooter</label>
+                <input type="string" id="Razor Scooter" readonly><br>
+              </p>
+              <p>
+                <label for="GeoBlade 500">GeoBlade 500</label>
+                <input type="string" id="GeoBlade 500" readonly><br>
+              </p>
+              <p>
+                <label for="Unagi E500">Unagi E500</label>
+                <input type="string" id="Unagi E500" readonly><br>
+              </p>
+            </div>
+          </form>
+        </div>
+        <br><br>
       </main>
+
+      <script>
+        //javascript can go in here. this is where I prefer to put it if it's going to be short and simple.
+        function convertDistanceToTime(distance) {
+            // Define transportation methods with their speeds and ranges
+            const transports = [
+                { name: 'Walking', speed: 3.1, range: 25 },
+                { name: 'Boosted Mini S Board', speed: 18, range: 7 },
+                { name: 'Evolve Bamboo GTR 2in1', speed: 24, range: 31 },
+                { name: 'OneWheel XR', speed: 19, range: 18 },
+                { name: 'Swagtron Swagger 5 Elite', speed: 18, range: 12 },
+                { name: 'Segway Ninebot S', speed: 10, range: 13 },
+                { name: 'Segway Ninebot S-PLUS', speed: 12, range: 22 },
+                { name: 'Razor Scooter', speed: 18, range: 15 },
+                { name: 'GeoBlade 500', speed: 15, range: 8 },
+                { name: 'Unagi E500', speed: 16, range: 15 }
+            ];
+    
+            // Calculate time for each transportation method
+            const times = {};
+            transports.forEach(method => {
+                if (isNaN(distance)) {
+                    times[method.name] = "Please input a distance."
+                } else if (distance <= method.range) {
+                    const time = distance / method.speed * 60;
+                    const minutes = Math.floor(time)
+                    const seconds = Math.floor((time - minutes) * 60)
+                    times[method.name] = minutes + ":" + seconds.toString().padStart(2, "0");
+                } else {
+                    times[method.name] = "Out of Range";
+                }
+            });
+    
+            return times;
+        }
+    
+        function convertAndDisplay() {
+            const distance = parseFloat(document.getElementById('distance').value);
+            console.log("value get: " + distance)
+            const times = convertDistanceToTime(distance);
+            console.log(times)
+
+            for (const method in times) {
+                // Populate each input field with the resultant string
+                console.log(method + ": " + times[method])
+                const output = times[method]
+                document.getElementById(method).value = output;
+            }
+        }
+    
+        document.getElementById("convert").onclick = () => {
+            console.log("button clicked!");
+            console.log("value in input: " + parseFloat(document.getElementById('distance').value))
+            convertAndDisplay();
+        };
+      </script>
 
       <footer>
         <h2>About</h2>
         <p>
-          This is some example code prepared for CS160: User Interface Design
-          &amp; Development, Spring 2024. It was built by Nate Weinman, Shm
-          Almeda, and Timothy J. Aveni.
+          This is a distance and time conversion site, built to help you quickly and easily
+          convert from distance to time, and vice versa, for various electric transport options.
+          Designed and built by Matthew Sun.
         </p>
       </footer>
     </div>
